@@ -4,11 +4,14 @@ import Navbar from './components/Navbar/Navbar';
 import Login from './components/Login/Login';
 import Dashboard from './components/Dashboard/Dashboard';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import Users from './components/Users/Users';
+import CreateOrder from './components/Orders/CreateOrder';
+import Register from './components/Register/Register';
 
 const NavbarWrapper = ({ isAuthenticated, userRole, userName }) => {
   const location = useLocation();
   
-  if (location.pathname === '/login') {
+  if (location.pathname === '/login'|| location.pathname === '/register') {
     return null;
   }
 
@@ -55,12 +58,30 @@ const App = () => {
           element={<Login onLoginSuccess={handleLoginSuccess} />} 
         />
         <Route
+          path="/register"
+          element={<Register />} 
+        />
+        <Route
           path="/dashboard"
           element={
             <PrivateRoute isAuthenticated={isAuthenticated}>
               <Dashboard />
             </PrivateRoute>
           }
+        />
+        <Route path="/users" 
+        element={
+        <PrivateRoute isAuthenticated={isAuthenticated} userRole={userRole}>
+        <Users />
+        </PrivateRoute >
+        } 
+        />
+        <Route path="/order/create" 
+        element={
+        <PrivateRoute isAuthenticated={isAuthenticated}userRole={userRole}>
+        <CreateOrder />
+        </PrivateRoute >
+        }
         />
       </Routes>
     </Router>

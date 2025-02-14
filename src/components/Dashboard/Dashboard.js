@@ -1,59 +1,63 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import './Dashboard.css'; // Importamos estilos
 
 const Dashboard = () => {
-  const [userData, setUserData] = useState(null);
+  
   const [error, setError] = useState(null);
-  const navigate = useNavigate(); // Hook para redirigir
+  const navigate = useNavigate();
+  const role = sessionStorage.getItem('userRole');
+
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const token = sessionStorage.getItem('authToken'); // ⚡ Usar sessionStorage en lugar de localStorage
-
+      const token = sessionStorage.getItem('authToken');
       if (!token) {
-        setError('No estás autenticado. Redirigiendo al login...');
-        setTimeout(() => {
-          navigate('/login'); // 🔥 Usa navigate para redirigir
-        }, 2000);
+        setError('No estás autenticado. Redirigiendo...');
+        setTimeout(() => navigate('/login'), 2000);
         return;
       }
-
-      try {
-        const response = await fetch('http://apigateway.com', {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error('Error al obtener datos');
-        }
-
-        const data = await response.json();
-        setUserData(data);
-      } catch (err) {
-        setError(err.message);
-      }
     };
-
     fetchUserData();
   }, [navigate]);
 
+  const renderModules = () => {
+    if (!role) return <p>Cargando módulos...</p>;
+
+    const modules = {
+      ADMIN: [
+        { name: 'Órdenes', icon: '📦', link: '/orders' },
+        { name: 'Usuarios', icon: '👥', link: '/users' },
+        { name: 'Clientes', icon: '🛒', link: '/customers' },
+        { name: 'Envíos', icon: '🚚', link: '/envios' },
+        { name: 'Pagos', icon: '💳', link: '/pagos' },
+      ],
+      CLIENT: [
+        { name: 'Generar Orden', icon: '📦', link: '/order/create' },
+        { name: 'Mis ordenes', icon: '🚚', link: '/order/List' },
+
+      ],
+      CARRIER: [
+        { name: 'Envíos', icon: '🚚', link: '/envios' },
+      ],
+    };
+
+    return (
+      <div className="dashboard-grid">
+        {modules[role]?.map((module, index) => (
+          <Link key={index} to={module.link} className="dashboard-card">
+            <span className="dashboard-icon">{module.icon}</span>
+            <span className="dashboard-text">{module.name}</span>
+          </Link>
+        )) || <p>No tienes acceso a módulos.</p>}
+      </div>
+    );
+  };
+
   return (
-    <div>
-      <h1>Bienvenido al Dashboard</h1>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {userData ? (
-        <div>
-          <p>Nombre: {userData.name}</p>
-          <p>Email: {userData.email}</p>
-          <p>Rol: {userData.role}</p>
-        </div>
-      ) : (
-        <p>Cargando datos...</p>
-      )}
+    <div className="dashboard-container">
+      <h1>Menú de {role}</h1>
+      {error ? <p className="error-text">{error}</p> : renderModules()}
     </div>
   );
 };

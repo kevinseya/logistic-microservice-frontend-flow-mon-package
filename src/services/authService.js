@@ -1,19 +1,24 @@
-// src/services/authService.js
-import axios from 'axios';
-
-// URL del microservicio de validación
-const API_BASE_URL = process.env.REACT_APP_URL_VALIDATION;
+const API_GATEWAY = "http://localhost:8000/"; // 🔥 Usar API Gateway en lugar de backend directo
 
 export const login = async (email, password, isClient) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/login`, {
-      email,
-      password,
-      isClient,
+    console.log("Formulario enviado al servicio"); // Asegúrate de que esto se imprima cuando se haga clic en el botón
+    const response = await fetch(`${API_GATEWAY}api/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password, isClient }),
     });
 
-    return response.data; // Contiene el token y el rol
+    if (!response.ok) throw new Error("Error en autenticación");
+
+    const data = await response.json();
+    sessionStorage.setItem("authToken", data.token);
+    sessionStorage.setItem("userRole", data.role);
+
+    return data;
   } catch (error) {
-    throw new Error('Error en la autenticación: ' + (error.response?.data?.message || error.message));
+    throw new Error(error.message);
   }
 };

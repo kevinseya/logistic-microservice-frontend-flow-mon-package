@@ -1,0 +1,237 @@
+/* Contenedor principal */
+.create-order-container {
+    max-width: 600px;        /* Ajusta el ancho máximo del formulario */
+    margin: 0 auto;          /* Centra el contenedor horizontalmente */
+    padding: 20px;           /* Espacio alrededor del contenido */
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    height: 100%;            /* Asegura que ocupe todo el alto de la pantalla */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;        /* Activa el desplazamiento en el contenedor principal */
+    scroll-behavior: smooth; /* Permite desplazamiento suave */
+}
+
+/* Título principal */
+.create-order-container h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+/* Formulario */
+.create-order-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Espacio vertical entre campos */
+}
+
+/* Etiqueta y campo de texto */
+.create-order-form label {
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+    color: #555;
+}
+
+.create-order-form input[type="text"],
+.create-order-form input[type="tel"],
+.create-order-form input[type="number"] {
+    padding: 0.5rem;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Subtítulos (Ubicación de Recogida/Entrega) */
+.create-order-form h4 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+/* Coordenadas seleccionadas (shipping/delivery) */
+.selected-coord {
+    font-size: 0.9rem;
+    color: #777;
+    margin-top: 0.3rem;
+}
+
+/* Botón de crear orden */
+.create-order-form button[type="submit"] {
+    padding: 0.6rem 1.2rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.create-order-form button[type="submit"]:hover {
+    background-color: #005ecb;
+}
+
+/* Mensaje de error */
+.error-message {
+    color: red;
+    margin-top: 1rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Sección donde se muestra el resultado (precio, orderId, etc.) */
+.order-result {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border: 2.5px solid #ccc;
+    display: grid; /* Activa Grid */
+    place-items: center;
+    position: fixed;   /* Hacemos que el order-result sea un popup */
+    top: 30%;          /* Lo colocamos a una altura decente */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 10;       /* Es el primer popup */
+}
+
+/* El botón de pagar */
+.pay-initiate-btn {
+    background-color: #db9618;
+    color: #fff;
+    border: none;
+    padding: 25px;
+    font-weight: 1000;
+    border-radius: 4px;
+    font-size: 25px; 
+    cursor: pointer;
+    transition: background-color 0.3s; 
+}
+
+.pay-initiate-btn:hover {
+    background-color: rgb(152, 107, 17);
+}
+
+/* Modal overlay */
+.payment-overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    z-index: 20;  /* Este popup debe estar por encima del de `order-result` */
+}
+
+/* Contenedor del modal */
+.payment-modal {
+    background-color: #fff;
+    padding: 20px;
+    max-width: 500px;
+    width: 100%;
+    border-radius: 8px;
+    position: relative;
+    z-index: 30;  /* Este popup debe estar por encima del anterior */
+}
+
+/* Botón de cerrar */
+.close-button {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+
+/* PaymentForm */
+.payment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.card-element-wrapper {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #fafafa;
+}
+
+.pay-button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pay-button:hover {
+    background-color: #43a047;
+}
+
+.status-message {
+    margin-top: 0.5rem;
+    color: #333;
+    font-weight: 500;
+}
+
+/* Popup de validación */
+.validation-message {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #28a745;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 40;  /* Este popup estará por encima de los otros */
+    font-size: 18px;
+    text-align: center;
+}
+
+.accept-button {
+    background-color: #ffffff;
+    color: #28a745;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.accept-button:hover {
+    background-color: #f1f1f1;
+}
+
+/* Botón de cerrar */
+.close-order-btn {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .close-order-btn:hover {
+    background-color: #c0392b;
+  }
+  
