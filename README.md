@@ -1,46 +1,58 @@
-# Proyecto de Gestión de Envíos de Paquetes
+# Package Shipment Management Project
 
-Este proyecto es una solución integral de microservicios para la gestión de envíos de paquetes, con pasarela de pago, elección de direcciones mediante mapas y diferentes roles de usuario (administrador, transportista, cliente). Está desplegado en AWS, utilizando varias tecnologías para garantizar su eficiencia, escalabilidad y seguridad.
+This project is an integrated microservices solution for managing package shipments, with a payment gateway, address selection via maps, and different user roles (admin, carrier, client). It is deployed on AWS, utilizing various technologies to ensure its efficiency, scalability, and security.
 
-## Descripción
+## Description
 
-La aplicación frontend está desarrollada utilizando **React.js** y corre en el puerto **3003**. El frontend se conecta al **API Gateway** de AWS para interactuar con los microservicios que gestionan los pagos, las asignaciones de transportistas y la gestión de envíos. El sistema está basado en una arquitectura de microservicios, y se comunica entre diferentes microservicios a través de **APIs REST**, **GraphQL**, **WebSockets** y **Webhooks**.
+The frontend application is developed using **React.js** and runs on port **3003**. The frontend connects to the **AWS API Gateway** to interact with the microservices that handle payments, carrier assignments, and shipment management. The system is based on a microservices architecture, communicating between different microservices through **REST APIs**, **GraphQL**, **WebSockets**, and **Webhooks**.
 
-## Características
+## Features
 
-- **Frontend con React.js**: La interfaz de usuario es dinámica y amigable, permitiendo a los clientes seleccionar direcciones mediante mapas, realizar pagos y seguir el estado de sus envíos.
-- **Conexión con API Gateway**: El frontend se conecta al API Gateway de AWS, que distribuye las rutas y gestiona las interacciones entre los microservicios.
-- **Seguridad**: Implementa autenticación mediante **JWT** (token de seguridad), validando los accesos según los roles de usuario (administrador, transportista, cliente).
-- **Gestión de pagos**: Integración con **Stripe** para el procesamiento de pagos de manera segura.
-- **Asignación de transportistas**: Los usuarios pueden gestionar la asignación de transportistas para el envío de paquetes, optimizando la logística.
-- **Notificaciones en tiempo real**: A través de **WebSockets** y **Webhooks**, los usuarios reciben notificaciones en tiempo real sobre el estado de sus pedidos y pagos.
+- **Frontend with React.js**: The user interface is dynamic and user-friendly, allowing clients to select addresses via maps, make payments, and track the status of their shipments.
+- **Connection with API Gateway**: The frontend connects to the AWS API Gateway, which distributes routes and manages interactions between microservices.
+- **Security**: Implements authentication using **JWT** (security token), validating access based on user roles (admin, carrier, client).
+- **Payment Management**: Integration with **Stripe** for secure payment processing.
+- **Carrier Assignment**: Users can manage carrier assignments for package shipments, optimizing logistics.
+- **Real-time Notifications**: Through **WebSockets** and **Webhooks**, users receive real-time notifications about the status of their orders and payments.
 
-## Tecnologías
+## Technologies
 
-- **React.js**: Biblioteca de JavaScript para construir interfaces de usuario interactivas.
-- **API Gateway (AWS)**: Para la gestión de rutas y comunicación entre microservicios.
-- **WebSockets**: Para la sincronización en tiempo real entre el frontend y los microservicios.
-- **Stripe**: Pasarela de pago utilizada para procesar pagos de forma segura.
-- **CORS**: Gestión de la seguridad en las solicitudes de recursos entre dominios.
-- **JWT**: Autenticación de usuarios mediante tokens de seguridad con roles.
+- **React.js**: A JavaScript library for building interactive user interfaces.
+- **API Gateway (AWS)**: For route management and communication between microservices.
+- **WebSockets**: For real-time synchronization between the frontend and microservices.
+- **Stripe**: Payment gateway used for secure payment processing.
+- **CORS**: Manages security for cross-origin resource requests.
+- **JWT**: User authentication using security tokens with roles.
 
-## Instrucciones para ejecutar
+## Instructions to Run
 
-1. Clona este repositorio:
+1. Clone this repository:
 
    ```bash
-   git clone https://github.com/tu_usuario/tu_repositorio.git
+   git clone https://github.com/kevinseya/logistic-frontend-app.git
+
     ```
 
-2. Instala dependencias 
+2. Install dependences
 
     ```bash
-  npm install
+   npm install
     ```
 
-3. Iniciar servidor de desarollo
+3. Run server of development
     ```bash
     npm start
     ```
 
-El frontend estará corriendo en el puerto 3003 y se conectará automáticamente al API Gateway para las interacciones con los microservicios.
+
+The frontend will be running on port 3003 and will automatically connect to the API Gateway for interactions with the microservices.
+
+![1](https://github.com/user-attachments/assets/03213232-c046-4eac-93ce-a1850b3028d6)
+![2](https://github.com/user-attachments/assets/2ddabe38-56b0-43b3-8156-f6e3b8cfd885)
+![3](https://github.com/user-attachments/assets/754ebc1a-7217-44f6-8ed6-df3d5fec173f)
+![4](https://github.com/user-attachments/assets/74146f7e-4ed8-4ee7-91a7-283e765213bf)
+![5](https://github.com/user-attachments/assets/cc9fe6a1-13b6-4d58-aae7-16bdad1e8bdc)
+![6](https://github.com/user-attachments/assets/6923572e-4be7-4d00-9f40-1c782d934989)
+![7](https://github.com/user-attachments/assets/c48e0e7a-db7d-4466-97bc-dc6db4361e22)
+![8](https://github.com/user-attachments/assets/098e307c-903c-4f0b-a455-35d08b62e0e5)
+
