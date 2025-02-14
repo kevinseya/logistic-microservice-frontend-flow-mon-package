@@ -1,0 +1,64 @@
+name: CI/CD to EC2
+
+on:
+  push:
+    branches: ["test"]
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build Docker Image
+        run: |
+          echo "Building Docker image..."
+          docker build -t kevinseya/logistic_frontend_app:latest .
+
+      - name: Push Docker Image
+        run: |
+          echo "Pushing Docker image to Docker Hub..."
+          docker push kevinseya/logistic_frontend_app:latest
+
+  deploy-to-ec2:
+    needs: build-and-push-image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up SSH key for EC2 access
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.EC2_PRIVATE_KEY }}
+
+      - name: SSH into EC2 and deploy container
+        run: |
+          ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_PUBLIC_DNS }} << 'EOF'
+            # Verificar e instalar Docker si es necesario.
+            if ! command -v docker &> /dev/null; then
+              sudo yum update -y
+              sudo yum install -y docker
+              sudo systemctl start docker
+              sudo systemctl enable docker
+            fi
+
+            # Bajar la imagen
+            sudo docker pull kevinseya/logistic_frontend_app:latest
+
+            # Detener y eliminar contenedor anterior
+            sudo docker stop logistic_frontend_app || true
+            sudo docker rm logistic_frontend_app || true
+
+            # Generar archivo .env
+            echo "REACT_APP_URL_VALIDATION=${{ secrets.REACT_APP_URL_VALIDATION }}" > .env
+            echo "PORT=${{ secrets.PORT }}" >> .env
+            
+
+            # Ejecutar nuevo contenedor
+            sudo docker run -d --name logistic_frontend_app \
+              --env-file .env \
+              -p 3003:3003 \
+              kevinseya/logistic_frontend_app:latest
+          EOF

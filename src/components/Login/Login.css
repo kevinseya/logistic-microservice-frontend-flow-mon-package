@@ -1,0 +1,151 @@
+/* Contenedor principal */
+.login-container {
+  display: flex;
+  height: 100vh;
+  background-color: #f4f7fc;
+  font-family: 'Roboto', sans-serif;
+  transition: all 0.3s ease;
+}
+
+/* Estilos para la parte izquierda (imagen) */
+.login-left {
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.login-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+  transition: all 0.5s ease;
+}
+
+.login-left:hover .login-image {
+  filter: brightness(0.5); /* Oscurecer más cuando se pasa el ratón */
+}
+
+/* Estilos para la parte derecha (formulario) */
+.login-right {
+  width: 50%;
+  padding: 40px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.sub-title {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 30px;
+  font-weight: 400;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.input-group label {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 15px;
+  margin-top: 8px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  box-sizing: border-box;
+  background-color: #f7f7f7;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.input-group input:focus {
+  border-color: #4caf50;
+  background-color: #fff;
+  outline: none;
+}
+
+.login-btn {
+  padding: 15px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  margin-top: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #45a049;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.register-link {
+  color: #007bff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.register-link:hover {
+  text-decoration: underline;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+  }
+
+  .login-left,
+  .login-right {
+    width: 100%;
+    height: auto;
+  }
+
+  .login-image {
+    height: 250px;
+    object-fit: cover;
+  }
+
+  .login-right {
+    padding: 20px;
+  }
+}
