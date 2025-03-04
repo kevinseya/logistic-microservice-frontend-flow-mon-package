@@ -27,7 +27,7 @@ const Register = () => {
     try {
       // Aquí se coloca la URL de tu API Gateway
       console.log(userData);
-      const response = await fetch('http://localhost:8080/api/customers/create', {
+      const response = await fetch(${API_CUSTOMERS_CREATE}, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
