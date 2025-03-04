@@ -1,4 +1,4 @@
-const API_GATEWAY = "http://localhost:8000/"; // 🔥 Usar API Gateway en lugar de backend directo
+const API_GATEWAY = ${IP_API_GATEWAY}; // 🔥 Usar API Gateway en lugar de backend directo
 
 export const login = async (email, password, isClient) => {
   try {
