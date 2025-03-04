@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Users.css';
 
-const API_GATEWAY = "http://localhost:1025"; // 🔥 URL del API Gateway
+const API_GATEWAY = ${IP_API_GATEWAY}; // 🔥 URL del API Gateway
 
 const Users = () => {
   const [users, setUsers] = useState([]);
