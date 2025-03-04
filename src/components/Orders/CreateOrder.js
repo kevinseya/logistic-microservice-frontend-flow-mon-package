@@ -11,10 +11,10 @@ import { Elements, useStripe, useElements, CardElement } from '@stripe/react-str
 // Modal
 import Modal from 'react-modal';
 // Aquí tu publishable key
-const stripePromise = loadStripe('pk_test_51QpnOPQ8CFT0wt4iWmDShsahZMvJrcBBiXkvW4OGDx51TNQQNOP2xtcAev1PZuGSHbjqJyu4ikmhFbKVXK8d2hII00TunemFcW');
+const stripePromise = loadStripe(${API_PK_TEST_STRIPE});
 
 // Gateway de tu API
-const API_GATEWAY = 'http://localhost:7000';
+const API_GATEWAY = ${IP_API_GATEWAY};
 
 // -------------------------------------------------------
 // 1) Componente PaymentForm (Formulario de tarjeta)
@@ -64,7 +64,7 @@ const PaymentForm = ({ clientSecret, setShowValidationMessage }) => {
       const token = sessionStorage.getItem('authToken');
 
       try {
-        const response = await fetch(`http://localhost:8088/api/payment/validation`, {
+        const response = await fetch(${API_PAYMENT_VALIDATION}, {
             
           method: 'POST',
           headers: {
@@ -256,7 +256,7 @@ const CreateOrder = () => {
         currency: 'usd'
       };
 
-      const res = await fetch(`http://localhost:8087/api/payment/create-intent`, {
+      const res = await fetch(${API_PAYMENT_CREATE_INTENT}, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
