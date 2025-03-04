@@ -20,7 +20,7 @@ const LocationPicker = ({ onLocationSelect }) => {
   // Cargamos la librería de Google Maps con la API Key
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: "AIzaSyATOtx1lxiwLzbbZWaeI21ZcqzZ6CvxT7I" //process.env.REACT_APP_MAPS_API_KEY  // o tu key "hardcodeada"
+    googleMapsApiKey: ${API_KEY_GOOGLE_MAPS} //process.env.REACT_APP_MAPS_API_KEY  
   });
 
   // Esta función se ejecuta cuando el usuario hace clic en el mapa
